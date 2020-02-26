@@ -23,6 +23,7 @@
    - The *forward branching factor* of our problem is defined by the maximum number of adjacent cities we can have at any state.
      - In our case this would be at Bucharest or Sibiu where we have 4 adjacent cities.
      - **Our Forward Branching factor is $4$**
+   - In our problem we are optimizing for number of steps and are ignoring distance cost completely. All costs will be treated as a value of 1.
 
 2. Solved Trees
    1. Depth First
@@ -33,3 +34,15 @@
       - As expected we get the same result as Breadth first. The main difference is that we clear our space after we expand each level so the space complexity is less. Time complexity is the same.   
       - ![alt text](IterativeDeepening.svg.png)
    4. A*
+      - The format is (expansion order : h(n))
+      - an expansion order of 0 means it wasn't expanded was just revealed.  
+      -  ![alt text](AStar.svg.png)
+
+3. For A* search I based my heuristic on a distance tier list. 
+   - I measured the relative distance of all the nodes to Vaslui using a paper and pencil to mark.
+   - I ordered them from 19 to 0. 
+     - 19 being the furthest node and 0 being Vaslui. When I compute the heuristic value I simple use the level from the list.
+   - Since all the steps are the same cost to us there is no need to add a g(n).
+   - The list is as follows 19 to 0 respectively. 
+     - O, A, Z, T, L, D, M, S, C, R, F, P, G, B, N, E, U, H, I, V
+
