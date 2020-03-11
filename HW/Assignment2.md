@@ -4,7 +4,7 @@
    - Overview
       - While we might at first be tempted to treat this problem such that each agent has to search a path towards the other this will increase our branching factor by an entire degree. Instead of being $N$ where $N$ is the max outgoing paths of any city it will become $N^2$
         - So instead we can just find a route from agent $\alpha$'s starting point to agent $\beta$'s starting point.
-          - If we are worried about finding a solution where the number of steps is distributed equally between the agents we can simply back track $T$ times where T is just the floor of the number of steps taken divided by 2.
+          - Afterwards we can backtrack (cost/2) + 1 steps and that will give us the path for agent B
       - So our formalization will be defined by finding a path from Arad to Vaslui.
    - $\Sigma$: Our set of possible states is defined by the list of cities in which our agent $\alpha$ could reside
      - let $X$ be a set of all cities in the map.
@@ -23,6 +23,8 @@
    - The *forward branching factor* of our problem is defined by the maximum number of adjacent cities we can have at any state.
      - In our case this would be at Bucharest or Sibiu where we have 4 adjacent cities.
      - **Our Forward Branching factor is $4$**
+     - However it is impossible to reach the state where we have 4 cities that have not been explored yet because you have to explore an adjacent state to reach that state. 
+       - **Therefore our final forward branching factor is $3$**
    - In our problem we are optimizing for number of steps and are ignoring distance cost completely. All costs will be treated as a value of 1.
 
 2. Solved Trees
@@ -45,4 +47,3 @@
    - Since all the steps are the same cost to us there is no need to add a g(n).
    - The list is as follows 19 to 0 respectively. 
      - O, A, Z, T, L, D, M, S, C, R, F, P, G, B, N, E, U, H, I, V
-
