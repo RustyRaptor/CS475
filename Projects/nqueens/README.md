@@ -3,11 +3,14 @@ Ziad Arafat
 Feb 2 2021
 
 ## How to compile
+Run this command in a terminal
 ```
 make
 ```
 
 ## Usage
+
+Run this command in a terminal.
 
 ```
 make run
