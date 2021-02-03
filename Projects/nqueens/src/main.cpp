@@ -7,7 +7,7 @@
 using namespace std;
 
 vector<int> generateQueens( int Q1, int Q2, int Q3, int Q4 ) {
-        vector<int> queens;
+        int[] queens;
         queens.push_back( Q1 );
         queens.push_back( Q2 );
         queens.push_back( Q3 );
@@ -24,10 +24,20 @@ void printStack( vector<vector<int> > stack ) {
         }
 }
 
-vector<vector<int>> generateBranch(vector<int> queens, vector<vector<int>> stack) {
-        if (find(queens.begin(), queens.end(), 0) == queens.end()) {
+vector<vector<int> > generateBranch( vector<int> queens,
+                                     vector<vector<int> > stack ) {
+        if ( find( queens.begin( ), queens.end( ), 0 ) == queens.end( ) ) {
                 return stack;
         }
+}
+
+vector<vector<int> > nqueenSolv( int N ) {
+        vector<vector<int> > all_positions;
+        for ( int i = 0; i < N; i++ ) {
+                all_positions.push_back( generateQueens( i, 0, 0, 0 ) );
+        }
+
+        
 }
 
 int main( int argc, char **argv ) {
