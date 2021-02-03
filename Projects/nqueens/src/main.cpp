@@ -6,6 +6,7 @@
 
 using namespace std;
 
+// Will print a 2D vector (for debugging)
 void printStack2D( vector<vector<int> > stack ) {
         for ( auto i = stack.begin( ); i != stack.end( ); i++ ) {
                 for ( auto j = ( *i ).begin( ); j != ( *i ).end( ); j++ ) {
@@ -15,6 +16,7 @@ void printStack2D( vector<vector<int> > stack ) {
         }
 }
 
+// Will print a vector
 void printStack( vector<int> stack ) {
         for ( auto i = stack.begin( ); i != stack.end( ); i++ ) {
                 cout << *i;
@@ -22,6 +24,8 @@ void printStack( vector<int> stack ) {
         cout << endl;
 }
 
+// Will insert a number into a position in the queens vector. 
+// I'm not sure how this got so complicated. I need to get better at C++
 vector<int> generatePosition( int num, vector<int> queens, int n ) {
         vector<int> newQueens = queens;
 
@@ -41,6 +45,9 @@ vector<int> generatePosition( int num, vector<int> queens, int n ) {
         return newQueens;
 }
 
+
+// Checks if the queens can attack each other using absolute value for their slope.
+// WIsh it wasn't so over nested but it works. 
 bool isValid( vector<int> queens, int n ) {
         for ( int i = 0; i < n; i++ ) {
                 for ( int j = 0; j < n; j++ ) {
@@ -61,25 +68,7 @@ bool isValid( vector<int> queens, int n ) {
         return false;
 }
 
-// bool attack(vector<int> ref, int col)
-// {
-//    for(int i = 0; i < col; i++)
-//    {
-//       for(int j = 0; j < col; j++)
-//       {
-//          if(i != j)
-//          {
-//             if(ref[i] == ref[j])
-//                return true;
-//             if(abs(i-j) == abs(ref[i] - ref[j]))
-//                return true;
-//          }
-//       }
-//    }
-//    return false;
-// }
-
-
+// Main code to solve the nqueens problem. 
 vector<int> nqueenSolv( int N ) {
         vector<vector<int> > all_positions;
         for ( int i = 0; i < N; i++ ) {
@@ -91,6 +80,7 @@ vector<int> nqueenSolv( int N ) {
                 all_positions.push_back( queens );
         }
 
+        // // uncomment for debugging. 
         // for ( auto i : all_positions ) {
         //         for ( auto j : i ) {
         //                 cout << j;
