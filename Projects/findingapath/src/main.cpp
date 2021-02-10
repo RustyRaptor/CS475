@@ -26,15 +26,21 @@ void printStack( vector<int> stack ) {
 }
 
 
+// Checks if a vector contains a value
 bool vecContains( int x, vector<int> v ) {
-        if ( std::find( v.begin( ), v.end( ), x ) != v.end( ) ) {
+        if ( find( v.begin( ), v.end( ), x ) != v.end( ) ) {
                 return true;
         } else {
                 return false;
         }
 }
 
+
+// The logic ended up being really convoluted using a lot of vectors in order
+// to check neighbors, load the edges, and keep track of paths. 
 int main( int argc, char **argv ) {
+
+        // Vector to store explored nodes
         vector<int> explored;
 
         // for ( int i = 0; i < argc; i++ ) {
@@ -42,26 +48,34 @@ int main( int argc, char **argv ) {
         //         cout << argc << endl;
         // }
 
-        if ( argc > 1 ) {
+        // Make sure we have a filename argument. 
+        if ( argc > 2 or argc < 2 ) {
                 cout << "Please pass one argument the name of the test file"
                      << endl;
         }
 
+
+        // N = Node Count
+        // A = Starting node
+        // B = Destination node
         int N, A, B;
         ifstream infile( argv[1] );
         infile >> N >> A >> B;
 
         // cout << N << " " << A << " " << B << endl;
+
+        // Append the starting node to the possible paths. 
         vector<int> vec;
         vec.push_back( A );
-
         vector<vector<int> > possible_paths;
         possible_paths.push_back( vec );
 
 
+        // 2d vector to hold the edges
         vector<vector<int> > graph;
 
-
+        
+        // Load each edge into the vector
         int src, dst;
 
         while ( infile >> src >> dst ) {
@@ -72,7 +86,11 @@ int main( int argc, char **argv ) {
                 graph.push_back( vect );
         }
 
+
+        // Just like NQueens we loop until we run out of possible paths. 
         while ( !possible_paths.empty( ) ) {
+
+                // Pop the latest path
                 vector<int> temp = possible_paths.back( );
                 possible_paths.pop_back( );
                 // cout << "TEMP BACK IS: " << temp.back();
@@ -82,11 +100,16 @@ int main( int argc, char **argv ) {
                         return 0;
                 }
                 vector<int> connections;
+
+                // weird logic to collect neighboring nodes.
                 for ( auto i = graph.begin( ); i != graph.end( ); i++ ) {
+
+                        // if it's the first number return the second
                         if ( ( *i )[0] == temp.back( ) ) {
                                 // cout << "i: " << ( *i )[0]
                                 //      << "tempback: " << temp.back( ) << endl;
                                 connections.push_back( ( *i )[1] );
+                        // If its the second return the first
                         } else if ( ( *i )[1] == temp.back( ) ) {
                                 // cout << "i: " << ( *i )[1]
                                 //      << "tempback: " << temp.back( ) << endl;

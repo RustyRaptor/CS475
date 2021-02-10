@@ -92,10 +92,10 @@ run: all
 	# ---------------- DONE
 
 	# RUNNING TEST TWO nodes2.txt
-	./$(OUTPUTMAIN) nodes.txt
+	./$(OUTPUTMAIN) nodes2.txt
 	# ---------------- DONE
 
 	# RUNNING TEST THREE nodes3.txt
-	./$(OUTPUTMAIN) nodes.txt
+	./$(OUTPUTMAIN) nodes3.txt
 	# ---------------- DONE
 	@echo Executing 'run: all' complete!
