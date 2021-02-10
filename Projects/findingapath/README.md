@@ -1,6 +1,6 @@
-# Lab 1 CS 475
+# Lab 2 CS 475
 Ziad Arafat
-Feb 2 2021
+Feb 9 2021
 
 ## How to compile
 Run this command in a terminal
