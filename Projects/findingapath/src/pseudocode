@@ -1,0 +1,14 @@
+pseudocode
+
+Initialization: path= [], all_paths= []
+insert in all_paths an element of the form [A] –starting
+while all_paths is not empty
+  pop an element x out of all_paths// e.g.  x=[A,B,C] 
+                                   // x is the path array/vector
+  if the last node of x is B return x
+  update all_pathswith all possibilities for x
+    (for each neighbor N of the last node of x,
+    add to all_pathsa path with x, extended with N
+    i.e, if x = [A,B,C] then add [A,B,C,N] to all_paths)
+end-while
+if all_ paths isempty then return no-solution
