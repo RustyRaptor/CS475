@@ -110,7 +110,8 @@ int main( int argc, char **argv ) {
                 cout << argv[i] << endl;
         }
 
-        // First lets get the value of N
+        // I initially was going to use command line args but figured it's easier
+        // to just get user input for the time being. 
 
         if ( ( argc < 2 ) | ( argc > 2 ) ) {
                 cout << "Invalid argument count please pass an integer N"

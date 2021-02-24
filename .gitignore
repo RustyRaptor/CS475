@@ -57,3 +57,5 @@ hs_err_pid*
 *.app
 
 **aima-python
+
+**.idea
