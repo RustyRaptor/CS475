@@ -1,6 +1,7 @@
 from search import *
 from utils import *
 
+
 def breadth_first_tree_search(problem):
     """
     [Figure 3.7]
@@ -30,7 +31,7 @@ def depth_first_tree_search(problem):
     The argument frontier should be an empty queue.
     Repeats infinitely in case of loops.
     """
-    
+
     expansions = 0
 
     frontier = [Node(problem.initial)]  # Stack
@@ -42,6 +43,15 @@ def depth_first_tree_search(problem):
         frontier.extend(node.expand(problem))
         expansions += 1
     return None, expansions
+
+
+def conflict(row1, col1, row2, col2):
+    """Would putting two queens in (row1, col1) and (row2, col2) conflict?"""
+    return (row1 == row2 or  # same row
+            col1 == col2 or  # same column
+            row1 - col1 == row2 - col2 or  # same \ diagonal
+            row1 + col1 == row2 + col2)  # same / diagonal
+
 
 class NQueensDefectedProblem(Problem):
     """
@@ -79,15 +89,8 @@ class NQueensDefectedProblem(Problem):
 
     def conflicted(self, state, row, col):
         """Would placing a queen at (row, col) conflict with anything?"""
-        return any(self.conflict(row, col, state[c], c)
+        return any(conflict(row, col, state[c], c)
                    for c in range(col))
-
-    def conflict(self, row1, col1, row2, col2):
-        """Would putting two queens in (row1, col1) and (row2, col2) conflict?"""
-        return (row1 == row2 or  # same row
-                col1 == col2 or  # same column
-                row1 - col1 == row2 - col2 or  # same \ diagonal
-                row1 + col1 == row2 + col2)  # same / diagonal
 
     def goal_test(self, state):
         """Check if all columns filled, no conflicts."""
@@ -103,7 +106,7 @@ class NQueensDefectedProblem(Problem):
         if the count of conflicting pairs matches the input K value
         """
 
-        return ((self.number_of_conflicting_pairs(state)) == self.K)
+        return (self.number_of_conflicting_pairs(state)) == self.K
 
     def h(self, node):
         """Return number of conflicting queens for a given node"""
@@ -111,7 +114,7 @@ class NQueensDefectedProblem(Problem):
         for (r1, c1) in enumerate(node.state):
             for (r2, c2) in enumerate(node.state):
                 if (r1, c1) != (r2, c2):
-                    num_conflicts += self.conflict(r1, c1, r2, c2)
+                    num_conflicts += conflict(r1, c1, r2, c2)
 
         return num_conflicts
 
@@ -127,8 +130,8 @@ class NQueensDefectedProblem(Problem):
         for (r1, c1) in enumerate(state):
             for (r2, c2) in enumerate(state):
                 if (r1, c1) != (r2, c2):
-                    num_conflicts += self.conflict(r1, c1, r2, c2)
-        return (num_conflicts/2)
+                    num_conflicts += conflict(r1, c1, r2, c2)
+        return num_conflicts / 2
 
 
 a = [(5, 5), (4, 6), (4, 5), (4, 2), (4, 7)]
@@ -141,7 +144,7 @@ a = [(5, 5), (4, 6), (4, 5), (4, 2), (4, 7)]
 
 print("Searcher\tInputs\tResults")
 for i in a:
-    print("BFS\tN=", i[0], "K=",i[1],"\t", breadth_first_tree_search(NQueensDefectedProblem(i[0], i[1])))
-    print("DFS\tN=", i[0], "K=",i[1], "\t",depth_first_tree_search(NQueensDefectedProblem(i[0], i[1])))
-    print("DLS\tN=", i[0], "K=",i[1], "\t",depth_limited_search(NQueensDefectedProblem(i[0], i[1])))
-    print("IDS\tN=", i[0], "K=",i[1], "\t",iterative_deepening_search(NQueensDefectedProblem(i[0], i[1])))
+    print("BFS\tN=", i[0], "K=", i[1], "\t", breadth_first_tree_search(NQueensDefectedProblem(i[0], i[1])))
+    print("DFS\tN=", i[0], "K=", i[1], "\t", depth_first_tree_search(NQueensDefectedProblem(i[0], i[1])))
+    print("DLS\tN=", i[0], "K=", i[1], "\t", depth_limited_search(NQueensDefectedProblem(i[0], i[1])))
+    print("IDS\tN=", i[0], "K=", i[1], "\t", iterative_deepening_search(NQueensDefectedProblem(i[0], i[1])))
